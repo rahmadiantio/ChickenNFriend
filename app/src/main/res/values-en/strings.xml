@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ChickenNFriend</string>
+    <string name="belum_punya_akun">Not Have account?</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="camera">Choose Photo</string>
+    <string name="nama">Name</string>
+    <string name="saus">Sauce</string>
+    <string name="minuman">Drink</string>
+    <string name="submit">Submit</string>
+    <string name="kembali">Back</string>
+    <string name="hapus">Delete</string>
+    <string name="buat">Create</string>
+    <string name="ubah">Change</string>
+    <string name="harap_menunggu">Please Wait</string>
+    <string name="waktu">Time</string>
+    <string name="load_foto">Load Photo</string>
+    <string name="rekomendasikan">Rekomendtion</string>
+    <string name="komentar">Comment</string>
+    <string name="isi">Please Write Comment</string>
+    <string name="ganti">Change</string>
+    <string name="ganti_bahasa">Change Language</string>
+</resources>

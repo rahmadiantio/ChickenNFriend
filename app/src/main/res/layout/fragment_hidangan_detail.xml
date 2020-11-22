@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/warna">
+
+    <ImageView
+        android:id="@+id/recipe_photo"
+        android:layout_width="168dp"
+        android:layout_height="143dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.072"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recipe_photo">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="21dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nama"
+                android:layout_width="300sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="@string/nama"
+                android:textColor="@color/colorOrange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/edt_name"
+                android:layout_width="300sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="@string/nama"
+                android:textColor="@color/colorOrange"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/minuman"
+                android:layout_width="300sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:text="minuman"
+                android:textColor="@color/colorOrange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/edt_drink"
+                android:layout_width="300sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:text="@string/minuman"
+                android:textColor="@color/colorOrange"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/saus"
+                android:layout_width="300sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:text="@string/saus"
+                android:textColor="@color/colorOrange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/edt_sauce"
+                android:layout_width="300sp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                android:text="@string/saus"
+                android:textColor="@color/colorOrange"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout5"
+        app:layout_constraintVertical_bias="0.713">
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorOrange"
+            android:text="@string/hapus" />
+
+        <Button
+            android:id="@+id/create"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorBlue"
+            android:text="@string/buat" />
+
+        <Button
+            android:id="@+id/edit"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPurple"
+            android:text="@string/ubah" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/komen"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPurple"
+        android:text="@string/komentar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
