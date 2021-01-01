@@ -20,12 +20,12 @@
             android:id="@+id/greet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10sp"
-            android:paddingTop="5sp"
-            android:paddingBottom="5sp"
             android:text="TextView"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingLeft="10sp"
+            android:paddingTop="5sp"
+            android:paddingBottom="5sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_all_recipe"
@@ -34,6 +34,23 @@
             android:choiceMode="singleChoice" />
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/gl_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:clickable="true"
+        android:tint="@android:color/white"
+        app:borderWidth="0dp"
+        app:fabCustomSize="@dimen/design_fab_size_mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.934"
+        app:srcCompat="@android:drawable/ic_media_play" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_recipe"
@@ -46,7 +63,10 @@
         app:fabCustomSize="@dimen/design_fab_size_mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 

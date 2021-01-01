@@ -44,6 +44,11 @@ class HidanganListFragment : Fragment() {
         tombolHidangan.setOnClickListener(){
             (context as MainActivity).loadFragment(TambahHidanganFragment.newInstance(), true)
         }
+
+        val tombolGL = view.findViewById<FloatingActionButton>(R.id.gl_play)
+        tombolGL.setOnClickListener(){
+            (context as MainActivity).loadFragment(GLFragment.newInstance(), true)
+        }
         setHasOptionsMenu(true)
         return view
     }
