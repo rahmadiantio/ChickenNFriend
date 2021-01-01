@@ -10,6 +10,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver
+            android:name=".receiver.TimerNotificationActionReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="stop"/>
+                <action android:name="start"/>
+            </intent-filter>
+        </receiver>
+        
+        <receiver
+            android:name=".receiver.TimerExpiredReceiver"
+            android:enabled="true"
+            android:exported="false"/>
+        
         <activity android:name=".activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
