@@ -12,6 +12,7 @@ import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.activity
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.activity.MainActivity.Companion.detikSekarang
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.activity.MainActivity.Companion.removeAlarm
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.activity.MainActivity.Companion.setAlarm
+import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.util.NotificationUtil
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.util.PrefUtil
 import kotlinx.android.synthetic.main.fragment_timer.*
 import java.lang.NumberFormatException
@@ -31,10 +32,10 @@ class TimerFragment : Fragment() {
         val btnPlay = view.findViewById<Button>(R.id.btn_play)
         btnPlay.setOnClickListener(){
             if(!isMulai){
-                val total = 20
+                val total = 1
                 PrefUtil.setTimerLength(total, context as MainActivity)
-                setNewTimerLength()
-                startTimer()
+                setTimerBaru()
+                timerMulai()
                 isMulai = true
             }
         }
@@ -53,6 +54,7 @@ class TimerFragment : Fragment() {
         super.onResume()
         initTimer()
         removeAlarm((context as MainActivity))
+        NotificationUtil.sembunyikanNotifikasi(context as MainActivity)
     }
 
     override fun onPause() {
@@ -60,6 +62,7 @@ class TimerFragment : Fragment() {
         if(isMulai){
             timer.cancel()
             val waktuBangun = setAlarm((context as MainActivity), detikSekarang, sisaDetik)
+            NotificationUtil.lihatTimerBerjalan(context as MainActivity, waktuBangun)
         }
 
         PrefUtil.setPreviousTimerLength(detik, (context as MainActivity))
@@ -70,7 +73,7 @@ class TimerFragment : Fragment() {
     private fun initTimer(){
         isMulai = PrefUtil.getTimerState((context as MainActivity))
         if(!isMulai){
-            setNewTimerLength()
+            setTimerBaru()
             sisaDetik = detik
         }
         else{
@@ -88,12 +91,12 @@ class TimerFragment : Fragment() {
         }
 
         else if(isMulai){
-            startTimer()
+            timerMulai()
         }
         updatePerhitungan()
     }
 
-    private fun startTimer(){
+    private fun timerMulai(){
         if(sisaDetik <= 0){
             sisaDetik = detik
         }
@@ -109,7 +112,7 @@ class TimerFragment : Fragment() {
         }.start()
     }
 
-    private fun setNewTimerLength(){
+    private fun setTimerBaru(){
         val menit = PrefUtil.getTimerLength(context as MainActivity)
         detik = (menit * 60L)
     }
@@ -127,9 +130,7 @@ class TimerFragment : Fragment() {
 
     private fun onTimerFinished(){
         isMulai = false
-
-        setNewTimerLength()
-
+        setTimerBaru()
         PrefUtil.setRemainingTimerLength(detik, (context as MainActivity))
         sisaDetik = detik
         updatePerhitungan()
