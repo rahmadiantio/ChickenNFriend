@@ -1,9 +1,12 @@
 package id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.activity
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import kotlinx.android.synthetic.main.activity_splash_screen.*
+import r21nomi.com.glrippleview.GLRippleView
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.R
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -17,6 +20,5 @@ class SplashScreenActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, 5000)
-
     }
 }
