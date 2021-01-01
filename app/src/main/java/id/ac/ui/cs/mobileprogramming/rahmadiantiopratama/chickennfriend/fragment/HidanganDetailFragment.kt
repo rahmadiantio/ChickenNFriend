@@ -77,7 +77,7 @@ class HidanganDetailFragment : Fragment() {
 
         val tombolBuat = view.findViewById<Button>(R.id.create)
         tombolBuat.setOnClickListener(){
-//            (context as MainActivity).loadFragment(TimerFragment.newInstance(), false)
+            (context as MainActivity).loadFragment(TimerFragment.newInstance(), false)
         }
 
         val tombolHapus = view.findViewById<Button>(R.id.delete)

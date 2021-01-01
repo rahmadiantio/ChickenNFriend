@@ -1,5 +1,11 @@
 package id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.fragment
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
@@ -8,6 +14,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.activity.MainActivity
@@ -25,6 +34,59 @@ class TambahHidanganFragment : Fragment() {
     private var fotoPath: String? = null
     private lateinit var sausHidangan: String
     private lateinit var minumanHidangan: String
+    private var CAMERA = Manifest.permission.CAMERA
+    private var flagRequestPermissionCalled = false
+    private var permissionRequestCounter = 0
+    private var CAMERA_REQUEST_CODE = 101
+
+    private fun requestCameraPermission(context: Context, activity: Activity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)
+        ) {
+            AlertDialog.Builder(context)
+                .setTitle("Membutuhkan izin")
+                .setMessage("Membutuhkan Izin Untuk Aplikasi Ini")
+                .setPositiveButton(
+                    "Izinkan"
+                ) { _, _ ->
+                    requestPermissions(
+                        arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE
+                    )
+                }
+                .setNegativeButton(
+                    "Tidak"
+                ) { dialog, _ -> dialog.dismiss() }
+                .create().show()
+        } else {
+            requestPermissions(
+                arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(requireContext(), "Diizinkan", Toast.LENGTH_SHORT).show();
+            } else {
+                ++permissionRequestCounter
+                if(permissionRequestCounter == 2) {
+                    flagRequestPermissionCalled = true
+                }
+                Toast.makeText(requireContext(), "Ditolak", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private fun checkPermission(permission: String, context: Context): Boolean {
+        var check: Int = ContextCompat.checkSelfPermission(context, permission)
+        return (check == PackageManager.PERMISSION_GRANTED)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,10 +111,25 @@ class TambahHidanganFragment : Fragment() {
         }
 
         hidanganViewModel = ViewModelProvider(this).get(HidanganViewModel::class.java)
-
         val tombolFoto = view.findViewById<Button>(R.id.ambil_foto)
-        tombolFoto.setOnClickListener(){
-            (context as MainActivity).ambilFoto()
+        tombolFoto.setOnClickListener {
+            if (!checkPermission(CAMERA, requireContext())) {
+                if (!flagRequestPermissionCalled) {
+                    requestCameraPermission(requireContext(), requireActivity())
+                } else {
+                    AlertDialog.Builder(context)
+                        .setTitle("Izin Ditolak")
+                        .setMessage("Izin Ditolak Untuk Aplikasi Ini, Anda Harus Mengaktifkan Secara Manual")
+                        .setPositiveButton(
+                            "Tutup"
+                        ) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .create().show()
+                }
+            } else {
+                (context as MainActivity).ambilFoto()
+            }
         }
 
         val tombolLoadFoto = view.findViewById<Button>(R.id.load_foto)

@@ -28,8 +28,8 @@ class HidanganListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_hidangan_list, container, false)
-        view.greet.text = "Selamat Datang " +(context as MainActivity).userLogin!!.nama.toString() +
-                "!"
+        val nama = (context as MainActivity).userLogin!!.nama.toString()
+        view.greet.text = sapaan(nama)
         val adapter = HidanganListAdapter()
         val recyclerview = view.list_all_recipe
         recyclerview.adapter = adapter
@@ -63,4 +63,10 @@ class HidanganListFragment : Fragment() {
         @JvmStatic
         fun newInstance() = HidanganListFragment()
     }
+
+    init {
+        System.loadLibrary("cpp_lib")
+    }
+
+    external fun sapaan(nama: String) : String
 }

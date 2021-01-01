@@ -1,17 +1,25 @@
 package id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.activity
 
+import android.Manifest
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.AlertDialog
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
+import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.entity.HidanganEntity
@@ -19,6 +27,8 @@ import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.entity.U
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.fragment.LoginFragment
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.R
 import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.fragment.HidanganListFragment
+import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.receiver.TimerExpiredReceiver
+import id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.util.PrefUtil
 import java.io.File
 import java.util.*
 
@@ -137,6 +147,29 @@ class MainActivity : AppCompatActivity() {
         val bahaasa = sharedPreferences.getString("bahasa", "")
         if(bahaasa != null){
             setBahassa(bahaasa)
+        }
+    }
+
+    companion object{
+        val detikSekarang: Long
+            get() = Calendar.getInstance().timeInMillis / 1000
+
+        fun setAlarm(context: Context, detik: Long, berjalan: Long): Long{
+            val waktuBangun = (detik + berjalan) * 1000
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(context, TimerExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, waktuBangun, pendingIntent)
+            PrefUtil.setAlarmSetTime(detikSekarang, context)
+            return waktuBangun
+        }
+
+        fun removeAlarm(context: Context){
+            val intent = Intent(context, TimerExpiredReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.cancel(pendingIntent)
+            PrefUtil.setAlarmSetTime(0, context)
         }
     }
 }
