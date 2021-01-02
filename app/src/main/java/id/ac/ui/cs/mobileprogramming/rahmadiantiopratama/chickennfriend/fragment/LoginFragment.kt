@@ -29,7 +29,13 @@ class LoginFragment : Fragment() {
         userViewMoldel = ViewModelProvider(this).get(UserViewModel::class.java)
         val tombolLogin = view.findViewById<Button>(R.id.btn_login)
         tombolLogin.setOnClickListener(){
-            cekLogin()
+            if(!cekInternetKoneksi()){
+                Toast.makeText(requireContext(), "Harap Koneksi Internet Dinyalakan",
+                    Toast.LENGTH_LONG).show()
+            }
+            else {
+                cekLogin()
+            }
         }
 
         val tombolRegis = view.findViewById<Button>(R.id.btn_register)
@@ -47,14 +53,6 @@ class LoginFragment : Fragment() {
             }
         }
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if(!cekInternetKoneksi()){
-            Toast.makeText(requireContext(), "Harap Koneksi Internet Dinyalakan",
-                Toast.LENGTH_LONG).show()
-        }
     }
 
     fun cekInternetKoneksi(): Boolean{
