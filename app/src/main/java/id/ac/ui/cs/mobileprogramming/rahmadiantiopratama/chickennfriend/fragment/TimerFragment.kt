@@ -32,7 +32,7 @@ class TimerFragment : Fragment() {
         val btnPlay = view.findViewById<Button>(R.id.btn_play)
         btnPlay.setOnClickListener(){
             if(!isMulai){
-                val total = 1
+                val total = 20
                 PrefUtil.setTimerLength(total, context as MainActivity)
                 setTimerBaru()
                 timerMulai()

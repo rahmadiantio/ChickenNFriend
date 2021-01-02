@@ -1,10 +1,13 @@
 package id.ac.ui.cs.mobileprogramming.rahmadiantiopratama.chickennfriend.fragment
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -44,6 +47,19 @@ class LoginFragment : Fragment() {
             }
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if(!cekInternetKoneksi()){
+            Toast.makeText(requireContext(), "Harap Koneksi Internet Dinyalakan",
+                Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun cekInternetKoneksi(): Boolean{
+        val cm : ConnectivityManager = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return (cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnectedOrConnecting)
     }
 
     private fun cekLogin(){
