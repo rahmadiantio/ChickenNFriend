@@ -44,7 +44,7 @@ class TambahHidanganFragment : Fragment() {
         ) {
             AlertDialog.Builder(context)
                 .setTitle("Membutuhkan izin")
-                .setMessage("Membutuhkan Izin Untuk Aplikasi Ini")
+                .setMessage("Meminta Izin Kamera Agar Dapat Digunakan Untuk Mengambil Gambar")
                 .setPositiveButton(
                     "Izinkan"
                 ) { _, _ ->
